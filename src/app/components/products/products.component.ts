@@ -27,6 +27,8 @@ export class ProductsComponent implements OnInit {
     },
     description: ''
   };
+  limit = 10;
+  offset = 0;
 
   constructor(
     private storeService: StoreService,
@@ -36,10 +38,16 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts()
+    this.productsService.getProductsByPage(10)
       .subscribe(data => {
         this.products = data;
+        this.offset += this.limit;
       });
+    // this.productsService.getProductsByPage(10, 0)
+    // .subscribe(data => {
+    //   this.products = data;
+    //   this.offset += this.limit;
+    // });
   }
 
   onAddToShoppingCart(product: Product) {
@@ -62,7 +70,7 @@ export class ProductsComponent implements OnInit {
     const product: CreateProductDTO = {
       title: 'New Product',
       description: 'bla bla bla',
-      images: ['https://placeimg.com/640/480/animals?r=0.6330202058386367'],
+      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
       price: 1000,
       categoryId: 2,
     }
@@ -91,6 +99,13 @@ export class ProductsComponent implements OnInit {
       const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
+    })
+  }
+
+  loadMore() {
+    this.productsService.getProductsByPage(this.limit, this.offset).subscribe(data => {
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
     })
   }
 }
