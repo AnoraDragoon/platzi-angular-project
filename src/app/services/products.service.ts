@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from './../models/product.model';
 
@@ -8,7 +9,7 @@ import { CreateProductDTO, Product, UpdateProductDTO } from './../models/product
 })
 export class ProductsService {
 
-  private readonly apiUrl = '/api/products';
+  private readonly apiUrl = `${environment.API_URL}/api/products`;
 
   constructor(
     private http: HttpClient
