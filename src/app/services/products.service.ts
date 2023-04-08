@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { retry, catchError } from 'rxjs/operators';
+import { retry, catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
@@ -24,7 +24,15 @@ export class ProductsService {
       params = params.set('offset', offset);
     }
     return this.http.get<Product[]>(this.apiUrl, { params })
-      .pipe(retry(3));
+      .pipe(
+        retry(3),
+        map(products => products.map(item => {
+          return {
+            ...item,
+            taxes: .19 * item.price
+          };
+        }))
+      );
   }
 
   getProduct(id: string) {
