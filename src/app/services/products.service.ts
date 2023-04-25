@@ -19,11 +19,11 @@ export class ProductsService {
 
   getAllProducts(limit?: number, offset?: number) {
     let params = new HttpParams();
-    if (limit && offset) {
+    if (typeof limit === 'number' && typeof offset === 'number') {
       params = params.set('limit', limit);
       params = params.set('offset', offset);
     }
-    return this.http.get<Product[]>(this.apiUrl, { params })
+    return this.http.get<Product[]>(this.apiUrl, { params: params })
       .pipe(
         retry(3),
         map(products => products.map(item => {
