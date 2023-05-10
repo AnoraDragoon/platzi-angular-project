@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
+import { FilesService } from './services/files.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,10 @@ export class AppComponent {
   token: string = '';
 
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private filesService: FilesService
+  ) { }
 
   onLoaded(img: string) {
     console.log('log padre', img);
@@ -35,6 +40,12 @@ export class AppComponent {
       });
   }
 
-  profile() {}
+  downloadPdf() {
+    this.filesService.getFile(
+      'my.pdf',
+      `${environment.API_URL}/api/files/dummy.pdf`,
+      'application/pdf'
+    ).subscribe();
+  }
 
 }
