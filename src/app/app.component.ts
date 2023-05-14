@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from './services/auth.service';
 import { UsersService } from './services/users.service';
 import { FilesService } from './services/files.service';
 import { environment } from 'src/environments/environment';
@@ -14,6 +13,7 @@ export class AppComponent {
   imgParent = '';
   showImg = true;
   token: string = '';
+  imgRta: string = '';
 
 
   constructor(
@@ -46,6 +46,16 @@ export class AppComponent {
       `${environment.API_URL}/api/files/dummy.pdf`,
       'application/pdf'
     ).subscribe();
+  }
+
+  onUpload(event: Event) {
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0);
+    if (file) {
+      this.filesService.uploadFile(file).subscribe(
+        response => { this.imgRta = response.location }
+      )
+    }
   }
 
 }
