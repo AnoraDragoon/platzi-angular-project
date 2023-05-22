@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+// import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { MyCartComponent } from './pages/my-cart/my-cart.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -13,17 +13,17 @@ import { ProfileComponent } from './pages/profile/profile.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   { path: 'home', component: HomeComponent },
-  { path: 'category', component: CategoryComponent },
+  { path: 'category/:id', component: CategoryComponent },
   { path: 'my-cart', component: MyCartComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'recovery', component: RecoveryComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '', component: NotFoundComponent }
+  { path: 'profile', component: ProfileComponent }
+  // { path: '', component: NotFoundComponent }
 ];
 
 @NgModule({

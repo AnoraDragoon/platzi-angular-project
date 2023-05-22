@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from '../../models/product.model';
 
@@ -14,12 +14,11 @@ export class ProductsComponent {
 
   @Input() products: Product[] = [];
   @Output() loadMore: EventEmitter<string> = new EventEmitter();
+
   myShoppingCart: Product[] = [];
   total = 0;
   showProductDetail: boolean = false;
   productChosen: Product | null = null;
-  limit = 10;
-  offset = 0;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
 
@@ -42,7 +41,7 @@ export class ProductsComponent {
   onShowDetail(id: string) {
     this.statusDetail = 'loading';
     this.toggleProductDetail();
-    this.productsService.getProduct(id).subscribe(data => {
+    this.productsService.getOne(id).subscribe(data => {
       this.productChosen = data;
       this.statusDetail = 'success';
     }, errorMsg => {
