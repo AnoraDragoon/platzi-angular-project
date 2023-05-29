@@ -1,0 +1,31 @@
+#not-found-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin: 1rem;
+  text-align: center;
+  font-size: 3em;
+  font-style: inherit;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+a {
+  background-color: dodgerblue;
+  padding: 10px 30px;
+  text-decoration: none;
+  color: white;
+  border-radius: 5px;
+}
+
+#not-found-card>div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
