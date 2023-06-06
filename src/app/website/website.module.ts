@@ -4,12 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { SwiperModule } from 'swiper/angular';
 
 import { WebsiteRoutingModule } from './website-routing.module';
-import { ImgComponent } from './components/img/img.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NavComponent } from './components/nav/nav.component';
-import { ProductComponent } from './components/product/product.component';
-import { ProductsComponent } from './components/products/products.component';
-import { HighlightDirective } from './directives/highlight.directive';
 import { CategoryComponent } from './pages/category/category.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -18,19 +14,12 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { ReversePipe } from './pipes/reverse.pipe';
-import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    ImgComponent,
-    ProductComponent,
-    ProductsComponent,
     NavComponent,
-    ReversePipe,
-    TimeAgoPipe,
-    HighlightDirective,
     HomeComponent,
     CategoryComponent,
     MyCartComponent,
@@ -45,7 +34,8 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     CommonModule,
     WebsiteRoutingModule,
     FormsModule,
-    SwiperModule
+    SwiperModule,
+    SharedModule
   ]
 })
 export class WebsiteModule { }
