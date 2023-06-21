@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
+  // template: '<button (click)="createUser()">Create User</button><router-outlet></router-outlet>',
   template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.scss']
 })
@@ -33,7 +34,8 @@ export class AppComponent {
     this.usersService.create({
       name: 'Sebas',
       email: 'sebas@mail.com',
-      password: '1212'
+      password: '1212',
+      // role: 'customer'
     })
       .subscribe(rta => {
         console.log(rta);
