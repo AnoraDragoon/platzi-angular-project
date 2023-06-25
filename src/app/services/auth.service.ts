@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { Auth } from '../models/auth.model';
 import { TokenService } from './token.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ import { TokenService } from './token.service';
 export class AuthService {
 
   private apiUrl = `${environment.API_URL}/api/auth`;
+  private user: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  user$: Observable<User | null> = this.user.asObservable();
 
 
   constructor(
@@ -35,7 +38,7 @@ export class AuthService {
       //   Authorization: `Bearer ${token}`
       //   // 'Content-type': 'application/json'
       // }
-    });
+    }).pipe(tap(user => this.user.next(user)));
   }
 
   loginAndGet(email: string, password: string) {
@@ -46,5 +49,6 @@ export class AuthService {
 
   logout() {
     this.tokenService.removeToken();
+    this.user.next(null);
   }
 }
