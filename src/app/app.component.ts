@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
-  template: '<button (click)="createUser()">Create User</button><router-outlet></router-outlet>',
-  // template: '<router-outlet></router-outlet>',
+  // template: '<button (click)="createUser()">Create User</button><router-outlet></router-outlet>',
+  template: '<router-outlet></router-outlet>',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
